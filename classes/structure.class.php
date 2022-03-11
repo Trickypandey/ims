@@ -63,7 +63,7 @@ class Structure
         <head>
             
             <title><?= $title ?></title>
-            <base href="http://localhost/cms/code/">
+            <base href="http://localhost/cms/src/">
             <!-- Bootstrap core CSS -->
             <link href="<?= $dot ?>src/css/bootstrap.min.css" rel="stylesheet">
             <meta name="theme-color" content="#563d7c">
