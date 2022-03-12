@@ -51,6 +51,7 @@ class Structure
 
     public static function header($title)
     {
+        session_start();
         $uri   = rtrim(dirname(filter_input(INPUT_SERVER, "PHP_SELF", FILTER_SANITIZE_URL)), '/\\');
 
         $dot = "";
@@ -107,9 +108,9 @@ class Structure
                         <a href="page/signin.php">Login</a>
                         <!-- DROPDOWN MENU -->
                         <ul class="dropdown">
-                            <li><a href="login.php">Student</a></li>
-                            <li><a href="/">Staff</a></li>
-                            <li><a href="/">Admin</a></li>
+                            <li><a href="page/signin.php?show=student">Student</a></li>
+                            <li><a href="page/signin.php?show=teacher">Teacher</a></li>
+                            <li><a href="page/signin.php?show=admin">Admin</a></li>
                         </ul>
                     </li>
                     <li>

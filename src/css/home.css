@@ -5,6 +5,9 @@ body{
     background-size: 100%;
     background-repeat: no-repeat;
 }
+main{
+  width: 100%;
+}
 #louf{
     text-align: center;
 }
