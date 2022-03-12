@@ -1,5 +1,13 @@
 <?php
-
+$servername='localhost';
+$username='root';
+$serverpass='';
+$database='myrl';
+$con=mysqli_connect($servername,$username,$serverpass,$database);
+if(!$con)
+{
+    die;
+}
 class Session
 {
     public static function init()
@@ -52,6 +60,15 @@ class Structure
     public static function header($title)
     {
         session_start();
+        $servername='localhost';
+        $username='root';
+        $serverpass='';
+        $database='myrl';
+        $con=mysqli_connect($servername,$username,$serverpass,$database);
+        if(!$con)
+        {
+            die;
+        }
         $uri   = rtrim(dirname(filter_input(INPUT_SERVER, "PHP_SELF", FILTER_SANITIZE_URL)), '/\\');
 
         $dot = "";
@@ -118,7 +135,9 @@ class Structure
                 </ul>
             </nav>
         <?php
+        return $con;
     }
+    
 
     public static function footer()
     {
