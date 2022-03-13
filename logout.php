@@ -2,7 +2,7 @@
 // Import main class
 require "classes/structure.class.php";
 
-Session::init();
+Structure::header('logout');
 Session::unset();
 Session::destroy();
 Structure::checkLogin();

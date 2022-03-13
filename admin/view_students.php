@@ -7,7 +7,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("View Students - Admin");
@@ -26,8 +26,6 @@ echo('<hr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone Number</th>
-            <th scope="col">Teacher</th>
-            <th scope="col">Subjects</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -36,25 +34,23 @@ echo('<hr>
 $counter = 0;
 foreach ($students as $student) {
     $counter++;
-    if ($student["subjects"] == "") {
-        $student["subjects"] = "<span class='text-danger'>None</span>";
-    }
-    if ($student['teacher_name'] == "") {
-        $student['teacher_name'] = "<span class='text-danger'>None</span>";
-    }
+    // if ($student["subjects"] == "") {
+    //     $student["subjects"] = "<span class='text-danger'>None</span>";
+    // }
+    // if ($student['teacher_name'] == "") {
+    //     $student['teacher_name'] = "<span class='text-danger'>None</span>";
+    // }
 
     echo('<tr>
-        <th scope="row">'._esc($counter).'</th>
-        <td>'._esc($student["student_name"]).'</td>
-        <td>'._esc($student["email"]).'</td>
-        <td>'._esc($student["student_phone_number"]).'</td>
-        <td>'._esc($student["teacher_name"]).'</td>
-        <td>'._esc($student["subjects"]).'</td>
+        <td scope="row">'.$counter.'</td>
+        <td>'.$student["name"].'</td>
+        <td>'.$student["email"].'</td>
+        <td>'.$student["phone_number"].'</td>
         <td>
         <div class="container">
             <div class="row">
-              <div class="col"><a href="update_student.php?student_id='._esc($student["student_id"]).'" alt="Edit"><img src="../src/icons/edit-24px.svg" alt="Edit"></a></div>
-              <div class="col"><a href="delete_student.php?student_id='._esc($student["student_id"]).'"  alt="Delete"><img src="../src/icons/delete-24px.svg" alt="Delete"></a></div>
+              <div class="col"><a href="admin/update_student.php?student_id='.$student["uid"].'" alt="Edit"><img src="src/icons/edit-24px.svg" alt="Edit"></a></div>
+              <div class="col"><a href="admin/delete_student.php?student_id='.$student["uid"].'"  alt="Delete"><img src="src/icons/delete-24px.svg" alt="Delete"></a></div>
             </div>
           </div>
         </td>

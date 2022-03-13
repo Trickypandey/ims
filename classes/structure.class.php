@@ -12,7 +12,7 @@ class Session
 {
     public static function init()
     {
-        session_start();
+        // session_start();
     }
 
     public static function put($key, $value)
@@ -83,7 +83,7 @@ class Structure
             <title><?= $title ?></title>
             <base href="http://localhost/cms/src/">
             <!-- Bootstrap core CSS -->
-            <link href="<?= $dot ?>src/css/bootstrap.min.css" rel="stylesheet">
+            <link href="src/css/bootstrap.min.css" rel="stylesheet">
             <meta name="theme-color" content="#563d7c">
 
             <style>
@@ -110,7 +110,7 @@ class Structure
         <main role="main">
             <nav class="navbar">
                 <!-- LOGO -->
-                <div class="logo"><a href="index.php">TRICKY</a></div>
+                <div class="logo"><a href="index.php">IMS</a></div>
                 <!-- NAVIGATION MENU -->
                 <ul class="nav-links">
                 <!-- USING CHECKBOX HACK -->
@@ -121,15 +121,20 @@ class Structure
                     <li><a href="/">Home</a></li>
                     <li><a href="/">About</a></li>
                     <li><a href="/">Contact</a></li>
-                    <li class="services">
-                        <a href="page/signin.php">Login</a>
-                        <!-- DROPDOWN MENU -->
-                        <ul class="dropdown">
-                            <li><a href="page/signin.php?show=student">Student</a></li>
-                            <li><a href="page/signin.php?show=teacher">Teacher</a></li>
-                            <li><a href="page/signin.php?show=admin">Admin</a></li>
-                        </ul>
-                    </li>
+                    <?php if(isset($_SESSION['uid'])){
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                    }
+                    else{ ?>
+                        <li class="services">
+                            <a href="page/signin.php">Login</a>
+                            <!-- DROPDOWN MENU -->
+                            <ul class="dropdown">
+                                <li><a href="page/signin.php?show=student">Student</a></li>
+                                <li><a href="page/signin.php?show=teacher">Teacher</a></li>
+                                <li><a href="page/signin.php?show=admin">Admin</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                     <li>
                 </div>
                 </ul>

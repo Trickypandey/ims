@@ -5,38 +5,35 @@ require "../classes/structure.class.php";
 $con = Structure::header("Login");
 // echo '<pre>';
 // die;
-print_r($_SESSION);
+// print_r($_SESSION['uid']);
+if(isset($_SESSION['uid'])){
+  if($_SESSION['role'] == 'teacher')
+    header('Location: ../teacher/index.php');
+}
 // die;
 // Import main class
 $users = ['admin', 'student','teacher'];
 $eror='';
 if(isset($_POST['login']))
 {
-  if($users[1]==$_POST['user_type'])
-  {
-    
-  }
-  elseif($users[2]==$_POST['user_type'])
+  if(in_array($_POST['user_type'],$users))
   {
     $email=$_POST['email'];
     $password= $_POST['password'];
-    $sql= "SELECT * FROM `teacher` WHERE email like '$email' && password like '$password'";
+    $sql= "SELECT * FROM `user` WHERE email like '$email' && password like '$password' && role like'{$_POST['user_type']}'";
     if(false!== $result = mysqli_query($con, $sql)){
       $data = mysqli_fetch_assoc($result);
-      if($data !== null)
-        $_SESSION['uid'] = $data['teacher_id'];
-      else
+      if($data !== null){
+        $_SESSION['uid'] = $data['uid'];
+        $_SESSION['role'] = $_POST['user_type'];
+        header('Location: ../teacher/index.php');
+      }
+      else{
         $eror = 'Invalid credential';
+      }
     }else{
       $eror = 'Invalid credential';
     }
-  }
-  elseif($users[0]==$_POST['user_type'])
-  {
-    
-  }
-  else{
-    $eror='who are you';
   }
 }
 

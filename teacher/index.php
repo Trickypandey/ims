@@ -7,7 +7,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Teacher Panel - Project");
@@ -26,13 +26,13 @@ echo('<hr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="view_students.php" class="text-secondary text-decoration-none">View Students</a></td>
+                      <td><a href="admin/view_students.php" class="text-secondary text-decoration-none">View Students</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_subjects.php" class="text-secondary text-decoration-none">View Subjects</a></td>
+                      <td><a href="admin/view_subjects.php" class="text-secondary text-decoration-none">View Subjects</a></td>
                     </tr>
                     <tr>
-                      <td><a href="add_subject.php" class="text-secondary text-decoration-none">Add a new subject</a></td>
+                      <td><a href="admin/add_subject.php" class="text-secondary text-decoration-none">Add a new subject</a></td>
                     </tr>
                   </tbody>
                 </table>
