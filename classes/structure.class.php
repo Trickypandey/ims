@@ -119,7 +119,7 @@ class Structure
                 <!-- NAVIGATION MENUS -->
                 <div class="menu">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/">About</a></li>
+                    <li><a href="dashboard.php">dashboard</a></li>
                     <li><a href="/">Contact</a></li>
                     <?php if(isset($_SESSION['uid'])){
                         echo '<li><a href="logout.php">Logout</a></li>';
@@ -293,11 +293,7 @@ class Structure
           <h1 class="">'.$heading.'</h1>
         </div>
         <div class="col col-sm-1 pt-3">
-          <a href="'.$home.'" class="text-primary"><h6>Home</h6></a>
-        </div>
-        <div class="col col-sm-1 pt-3">
-          <a href="../logout.php" class="text-danger"><h6>Logout</h6></a>
-        </div>
+       
         </div>');
     }
 
@@ -346,5 +342,5 @@ class Structure
 
 function _esc($string)
 {
-    echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }

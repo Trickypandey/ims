@@ -5,11 +5,13 @@ class Admin extends Config
 {
     //////////////// STUDENT CRUD (creat, read, update, delete) ///////////////
     // CREATE a new student
-    public function create_student($student_name, $student_phone_number, $email, $password)
+    public function create_student($student_name, $student_phone_number, $email, $password, $role)
     {
+        
         // check if items to insert exists in the input array or note
-        if (isset($student_name) && isset($student_phone_number) && isset($email) && isset($password) && strlen($password) > 5) {
-            $insert = $this->db->query("INSERT INTO `student`(`student_name`, `student_phone_number`, `email`, `password`) VALUES (?, ?, ?, ?)", $student_name, $$student_phone_number, $email, $password);
+        if (isset($role) && isset($student_name) && isset($student_phone_number) && isset($email) && isset($password) && strlen($password) > 5) {
+            print_r('ok');
+            $insert = $this->db->query("INSERT INTO `user`(`name`, `phone_number`, `email`, `password`, `role`) VALUES (?,?,?,?,?)", $student_name, $student_phone_number, $email, $password, $role);
 
             // if more than 1 row returned then it insertion was successfull
             if ($insert->affectedRows() > 0) {
@@ -24,8 +26,9 @@ class Admin extends Config
     public function view_student($student_id, $single = false)
     {
         $success = false; // variable to return if insertion success or failed
+        if(gettype(intval($student_id)) != 'integer') return false;
 
-        $insert = $this->db->query("SELECT * FROM `user` WHERE role='student'");
+        $insert = $this->db->query("SELECT * FROM `user` WHERE role='student' and uid = " . $student_id);
         // check if items to insert exists in the input array or note
         // if ($single == true && $student_id != 0) {
         // } else {
@@ -45,14 +48,15 @@ class Admin extends Config
     }
 
     // UPDATE student
-    public function update_student($student_id, $student_name, $student_phone_number, $email, $password)
+    public function update_student($student_id, $student_name, $student_phone_number, $email, $password, $role)
     {
         // check if items to insert exists in the input array or note
         if (isset($student_id) && isset($student_name) && isset($student_phone_number) && isset($email) && isset($password)) {
-            $update = $this->db->query("UPDATE `student` SET `student_name`= ? , `student_phone_number`= ? , `email` = ? , `password` = ? WHERE `student_id` = ? ", $student_name, $student_phone_number, $email, $password, $student_id);
-
+        //    $update = $this->db->query("UPDATE `user` SET `name`=?,`phone_number`=?,`email`=?,`password`=?,`role`=? WHERE 'uid'=?", $student_name, $student_phone_number, $email, $password, $role, $student_id);
+            $update = $this->db->update("UPDATE `user` SET `name`='$student_name',`phone_number`='$student_phone_number',`email`='$email',`password`='$password',`role`='$role' WHERE uid =  $student_id");
+            var_dump($update);
             // if more than 1 row returned then it insertion was successfull
-            return ($update->affectedRows() > 0);
+            // return ($update->affectedRows() > 0);
         }
 
         return false;

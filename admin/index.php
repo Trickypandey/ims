@@ -6,7 +6,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Admin Panel - Project");
@@ -25,16 +25,16 @@ echo('<hr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="add_student.php" class="text-secondary">Add Student</a></td>
+                      <td><a href="admin/add_student.php" class="text-secondary">Add Student</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_students.php" class="text-secondary">View Student</a></td>
+                      <td><a href="admin/view_students.php" class="text-secondary">View Student</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_students.php" class="text-secondary">Update Student</a></td>
+                      <td><a href="admin/view_students.php" class="text-secondary">Update Student</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_students.php" class="text-secondary">Delete Student</a></td>
+                      <td><a href="admin/view_students.php" class="text-secondary">Delete Student</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -49,16 +49,16 @@ echo('<hr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="add_teacher.php" class="text-secondary">Add Teacher</a></td>
+                      <td><a href="admin/add_teacher.php" class="text-secondary">Add Teacher</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_teachers.php" class="text-secondary">View Teacher</a></td>
+                      <td><a href="admin/view_teachers.php" class="text-secondary">View Teacher</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_teachers.php" class="text-secondary">Update Teacher</a></td>
+                      <td><a href="admin/view_teachers.php" class="text-secondary">Update Teacher</a></td>
                     </tr>
                     <tr>
-                      <td><a href="view_teachers.php" class="text-secondary">Delete Teacher</a></td>
+                      <td><a href="admin/ view_teachers.php" class="text-secondary">Delete Teacher</a></td>
                     </tr>
                   </tbody>
                 </table>

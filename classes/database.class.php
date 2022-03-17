@@ -17,6 +17,11 @@ class DB
         }
         $this->connection->set_charset($charset);
     }
+    public function update($qry)
+    {
+        
+        return $this->connection->query($qry);
+    }
 
     public function query($query)
     {
@@ -37,6 +42,7 @@ class DB
                         $args_ref[] = &$arg;
                     }
                 }
+                
                 array_unshift($args_ref, $types);
                 call_user_func_array(array($this->query, 'bind_param'), $args_ref);
             }

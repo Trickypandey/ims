@@ -26,19 +26,29 @@ if(isset($_POST['login']))
       if($data !== null){
         $_SESSION['uid'] = $data['uid'];
         $_SESSION['role'] = $_POST['user_type'];
-        header('Location: ../teacher/index.php');
+        // echo $_SESSION['role'];die;
+        if($_SESSION['role']=='teacher')
+        {
+          header('Location: ../teacher/index.php');
+        }
+        elseif($_SESSION['role']=='admin')
+        {
+          header('Location: ../admin/index.php');
+        }
+        else
+        {
+          header('Location: ../student/index.php');
+        }
       }
       else{
         $eror = 'Invalid credential';
       }
-    }else{
+    }
+    else{
       $eror = 'Invalid credential';
     }
   }
 }
-
-
-
 ?>
 
 <main role="main" class="container mt-3">

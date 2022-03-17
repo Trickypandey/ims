@@ -7,7 +7,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("View Subjects - Teacher Panel");

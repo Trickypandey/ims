@@ -7,7 +7,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Update Student - Admin");
@@ -16,13 +16,13 @@ Structure::header("Update Student - Admin");
 // Check if form submitted
 if (Structure::if_all_inputs_exists(array("student_id","student_name","student_phone_number","email","password"), "POST") == true) {
     $admin = new Admin();
-
+    echo"hello";
     if (is_bool($admin->update_student(
-        filer_input(INPUT_POST, "student_id", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "student_name", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "student_phone_number", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "email", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "password", FILTER_DEFAULT)
+        filter_input(INPUT_POST, "student_id", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "student_name", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "student_phone_number", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "email", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "password", FILTER_DEFAULT), 'student'
     )) === true) {
         // On success
         Structure::successBox("Update Student", "Successfully updated student!", Structure::nakedURL("view_students.php"));
@@ -30,13 +30,12 @@ if (Structure::if_all_inputs_exists(array("student_id","student_name","student_p
         // On failure
         Structure::errorBox("Update Student", "Unable to update student!");
     }
-
     //$admin->close_DB();
-} elseif (isset(filer_input(INPUT_GET, "student_id", FILTER_DEFAULT)) && !empty(filer_input(INPUT_GET, "student_id", FILTER_DEFAULT))) {
+} elseif (isset($_GET['student_id'])) {
     $admin    = new Admin();
-    $student = $admin->view_student(filer_input(INPUT_GET, "student_id", FILTER_DEFAULT), true);
+    $student = $admin->view_student(filter_input(INPUT_GET, "student_id", FILTER_DEFAULT), true);
 
-    if (!isset($student["student_id"])) {
+    if (!isset($student["uid"])) {
         Structure::errorBox("Update Student", "Select a valid student!");
     } else {
         // Form to fill details
@@ -44,14 +43,14 @@ if (Structure::if_all_inputs_exists(array("student_id","student_name","student_p
         Structure::topHeading("Update Student");
         echo('<hr>
           <form method="POST">
-            <input type="hidden" name="student_id" value="'._esc($student['student_id']).'">
+            <input type="hidden" name="student_id" value="'._esc($student['uid']).'">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" name="student_name" class="form-control" id="student_name" aria-describedby="student_name" value="'._esc($student["student_name"]).'">
+              <input type="text" name="student_name" class="form-control" id="student_name" aria-describedby="student_name" value="'._esc($student["name"]).'">
             </div>
             <div class="form-group">
               <label for="student_phone_number">Phone Number</label>
-              <input type="number" name="student_phone_number" class="form-control" id="student_phone_number" aria-describedby="student_phone_number" value="'._esc($student["student_phone_number"]).'">
+              <input type="number" name="student_phone_number" class="form-control" id="student_phone_number" aria-describedby="student_phone_number" value="'._esc($student["phone_number"]).'">
             </div>
             <div class="form-group">
               <label for="email">Email address</label>
@@ -75,6 +74,7 @@ if (Structure::if_all_inputs_exists(array("student_id","student_name","student_p
     $admin->close_DB();
 } else {
     Structure::errorBox("Update Student", "No student selected!");
+    echo'hello';
 }
 // Display Footer
 Structure::footer();
