@@ -7,7 +7,7 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Update Teacher - Admin");
@@ -18,11 +18,11 @@ if (Structure::if_all_inputs_exists(array("teacher_id", "teacher_name", "teacher
     $admin = new Admin();
 
     if (is_bool($admin->update_teacher(
-        filer_input(INPUT_POST, "teacher_id", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "teacher_name", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "teacher_phone_number", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "email", FILTER_DEFAULT),
-        filer_input(INPUT_POST, "password", FILTER_DEFAULT)
+        filter_input(INPUT_POST, "teacher_id", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "teacher_name", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "teacher_phone_number", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "email", FILTER_DEFAULT),
+        filter_input(INPUT_POST, "password", FILTER_DEFAULT)
     )) === true) {
         // On success
         Structure::successBox("Update Teacher", "Successfully updated teacher!", Structure::nakedURL("view_teachers.php"));
@@ -32,9 +32,9 @@ if (Structure::if_all_inputs_exists(array("teacher_id", "teacher_name", "teacher
     }
 
     //$admin->close_DB();
-} elseif (isset(filer_input(INPUT_GET, "teacher_id", FILTER_DEFAULT)) && !empty(filer_input(INPUT_GET, "teacher_id", FILTER_DEFAULT))) {
+} elseif (isset(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT)) && !empty(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT))) {
     $admin    = new Admin();
-    $teacher  = $admin->view_teacher(filer_input(INPUT_GET, "teacher_id", FILTER_DEFAULT), true);
+    $teacher  = $admin->view_teacher(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT), true);
 
     if (!isset($teacher["teacher_id"])) {
         Structure::errorBox("Update Teacher", "Select a valid teacher!");

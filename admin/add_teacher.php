@@ -23,7 +23,7 @@ if (Structure::if_all_inputs_exists(array("teacher_name", "teacher_phone_number"
         filter_input(INPUT_POST, "password", FILTER_DEFAULT)
     )) === true) {
         // On success
-        Structure::successBox("Add teacher", "Successfully added teacher!", $struct->nakedURL("view_teachers.php"));
+        Structure::successBox("Add teacher", "Successfully added teacher!", structure::nakedURL("view_teachers.php"));
     } else {
         // On failure
         Structure::errorBox("Add teacher", "Unable to add a teacher!");

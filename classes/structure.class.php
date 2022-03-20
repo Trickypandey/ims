@@ -53,7 +53,7 @@ class Structure
     public static function checkLogin()
     {
         if (Session::isset('user_logged_type') == false) {
-            Structure::redirectHome();
+            // Structure::redirectHome();
         }
     }
 

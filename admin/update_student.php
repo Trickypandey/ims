@@ -16,7 +16,7 @@ Structure::header("Update Student - Admin");
 // Check if form submitted
 if (Structure::if_all_inputs_exists(array("student_id","student_name","student_phone_number","email","password"), "POST") == true) {
     $admin = new Admin();
-    echo"hello";
+    // echo"hello";
     if (is_bool($admin->update_student(
         filter_input(INPUT_POST, "student_id", FILTER_DEFAULT),
         filter_input(INPUT_POST, "student_name", FILTER_DEFAULT),
@@ -74,7 +74,7 @@ if (Structure::if_all_inputs_exists(array("student_id","student_name","student_p
     $admin->close_DB();
 } else {
     Structure::errorBox("Update Student", "No student selected!");
-    echo'hello';
+    // echo'hello';
 }
 // Display Footer
 Structure::footer();

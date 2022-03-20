@@ -5,6 +5,7 @@ class DB
     protected $connection;
     protected $query;
     public $query_count = 0;
+    // public $affected_rows = 0;
 
     public function __construct($dbhost = 'localhost', $dbuser = 'root', $dbpass = '', $dbname = '', $charset = 'utf8')
     {
@@ -20,8 +21,11 @@ class DB
     public function update($qry)
     {
         
-        return $this->connection->query($qry);
+        $res =  $this->connection->query($qry);
+        $this->num_rows = $this->connection->affected_rows;
+        return $this;
     }
+
 
     public function query($query)
     {
@@ -47,6 +51,7 @@ class DB
                 call_user_func_array(array($this->query, 'bind_param'), $args_ref);
             }
             $this->query->execute();
+            // var_dump($this->connection);
             if ($this->query->errno) {
                 $struct = new Structure();
                 echo($struct->errorPage('Unable to process MySQL query (check your params) - ' . $this->query->error));
@@ -100,6 +105,7 @@ class DB
 
     public function numRows()
     {
+        $this->affected_rows = $this->connection->affected_rows;
         $this->query->store_result();
         return $this->query->num_rows;
     }

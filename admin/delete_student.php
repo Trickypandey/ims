@@ -7,17 +7,19 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Delete Student - Admin");
 
 // Main Content Goes Here
 // Check if form submitted
-if (isset(isset(filter_input(INPUT_POST, "student_id", FILTER_DEFAULT)) && isset(filter_input(INPUT_POST, "delete_confirm", FILTER_DEFAULT)) && filter_input(INPUT_POST, "delete_confirm", FILTER_DEFAULT) == "yes") {
-    $admin = new Admin();
 
-    if (is_bool($admin->delete_student(filter_input(INPUT_POST, "student_id", FILTER_DEFAULT)))) === true) {
+if (isset($_GET['student_id']) ) {
+    $admin = new Admin();
+    
+
+    if ($admin->delete_student(filter_input(INPUT_GET, "student_id", FILTER_DEFAULT)) == true) {
         // On success
         Structure::successBox("Delete Student", "Successfully deleted student!", Structure::nakedURL("view_students.php"));
     } else {
@@ -25,7 +27,8 @@ if (isset(isset(filter_input(INPUT_POST, "student_id", FILTER_DEFAULT)) && isset
         Structure::errorBox("Delete Student", "Unable to delete student!");
     }
     //$admin->close_DB();
-} elseif (isset(filter_input(INPUT_GET, "student_id", FILTER_DEFAULT)) && !empty(filter_input(INPUT_GET, "student_id", FILTER_DEFAULT))) {
+} elseif (isset($_GET['student_id']) && !empty($_GET['student_id']        )) {
+    
     $admin    = new Admin();
     $student = $admin->view_student(filter_input(INPUT_GET, "student_id", FILTER_DEFAULT), true);
 
@@ -54,6 +57,7 @@ if (isset(isset(filter_input(INPUT_POST, "student_id", FILTER_DEFAULT)) && isset
 
     $admin->close_DB();
 } else {
+    echo 'hee'; die;
     Structure::errorBox("Update Student", "No student selected!");
 }
 // Display Footer
