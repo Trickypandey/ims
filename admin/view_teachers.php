@@ -53,9 +53,8 @@ foreach ($teachers as $teacher) {
         <td>
         <div class="container">
             <div class="row">
-              <div class="col"><a href="update_teacher.php?teacher_id='.($teacher["uid"]).'" alt="Edit"><img src="src/icons/edit-24px.svg" alt="Edit"></a></div>
-              <div class="col"><a href="assign_teacher.php?teacher_id='.($teacher["uid"]).'&teacher_name='.($teacher['name']).'" alt="ASssign Teacher"><img src="src/icons/assignment_ind-24px.svg" alt="Assign Teachers"></a></div>
-              <div class="col"><a href="delete_teacher.php?teacher_id='.($teacher["uid"]).'"  alt="Delete"><img src="src/icons/delete-24px.svg" alt="Delete"></a></div>
+              <div class="col"><a href="admin/update_teacher.php?teacher_id='.($teacher["uid"]).'" alt="Edit"><img src="src/icons/edit-24px.svg" alt="Edit"></a></div>
+              <div class="col"><a href="admin/delete_teacher.php?teacher_id='.($teacher["uid"]).'"  alt="Delete"><img src="src/icons/delete-24px.svg" alt="Delete"></a></div>
             </div>
           </div>
         </td>

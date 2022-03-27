@@ -41,7 +41,7 @@ if (isset($students_arr)) {
                 <div class="col">
                     <fieldset>
                     <table class="table table-striped table-bordered table-hover">
-                    <caption class="text-info">Assign student to <i>{$_GET['subject_name']}</i></caption>
+                    <caption class="text-info">Assign student to <i>'.$_GET['subject_name'].'</i></caption>
                       <thead class="bg-dark text-white">
                         <tr>
                           <th scope="col" style=" width: 10%; ">#</th>
@@ -57,7 +57,7 @@ if (isset($students_arr)) {
                 echo('<tr>
                   <td>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="students[]" value="{$student['student_id']}" {$checked}>
+                      <input class="form-check-input" type="checkbox" name="students[]" value="'.$student['student_id'].'" {$checked}>
                     </div>
                   </td>
                   <td>'.$student['student_name'].'</a></td>

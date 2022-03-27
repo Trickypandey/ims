@@ -5,4 +5,4 @@ require "classes/structure.class.php";
 Structure::header('logout');
 Session::unset();
 Session::destroy();
-Structure::checkLogin();
+Structure::redirectHome();

@@ -57,7 +57,6 @@ if (isset($_GET['student_id']) ) {
 
     $admin->close_DB();
 } else {
-    echo 'hee'; die;
     Structure::errorBox("Update Student", "No student selected!");
 }
 // Display Footer

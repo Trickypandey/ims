@@ -39,8 +39,8 @@ foreach ($subjects as $subject) {
         <td>
         <div class="container">
             <div class="row w-25">
-              <div class="col w-25"><a href="edit_subject.php?subject_id='._esc($subject["subject_id"]).'" alt="Edit"><img src="../src/icons/edit-24px.svg" alt="Edit"></a></div>
-              <div class="col w-25"><a href="assign_subjects.php?subject_id='._esc($subject["subject_id"]).'&subject_name='._esc($subject["subject_name"]).'" alt="Assign Subjects"><img src="../src/icons/assignment_ind-24px.svg" alt="Assign Subjects"></a></div>
+              <div class="col w-25"><a href="edit_subject.php?subject_id='._esc($subject["subject_id"]).'" alt="Edit"><img src="src/icons/edit-24px.svg" alt="Edit"></a></div>
+              <div class="col w-25"><a href="assign_subjects.php?subject_id='._esc($subject["subject_id"]).'&subject_name='._esc($subject["subject_name"]).'" alt="Assign Subjects"><img src="src/icons/assignment_ind-24px.svg" alt="Assign Subjects"></a></div>
             </div>
           </div>
         </td>

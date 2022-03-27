@@ -24,7 +24,7 @@ class Teacher extends Config
     // Function to list all the SUBJECTS by a teacher
     public function view_subjects()
     {
-        $teacher_id = $_SESSION["id"];
+        $teacher_id = $_SESSION["uid"];
         $success = false; // variable to return if insertion success or failed
 
         // check if items to insert exists in the input array or note

@@ -7,17 +7,17 @@ require "../classes/structure.class.php";
 Session::init();
 
 // Check if logged in otherwise redirect to login page
-Structure::checkLogin();
+// Structure::checkLogin();
 
 // Load Header
 Structure::header("Delete Teacher - Admin");
 
 // Main Content Goes Here
 // Check if form submitted
-if (Structure::if_all_inputs_exists(array("teacher_id", "delete_confirm"), "POST") == true && filter_input(INPUT_POST, "delete_confirm", FILTER_DEFAULT) == "yes") {
+if (isset($_GET['teacher_id'])) {
     $admin = new Admin();
-
-    if (is_bool($admin->delete_teacher(filter_input(INPUT_POST, "teacher_id", FILTER_DEFAULT))) === true) {
+    
+    if ($admin->delete_teacher(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT)) == true) {
         // On success
         Structure::successBox("Delete Teacher", "Successfully deleted teacher!", Structure::nakedURL("view_teachers.php"));
     } else {
@@ -26,7 +26,7 @@ if (Structure::if_all_inputs_exists(array("teacher_id", "delete_confirm"), "POST
     }
 
     //$admin->close_DB();
-} elseif (isset(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT)) && !empty(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT))) {
+} elseif (isset($_GET['teacher_id']) && !empty($_GET['teacher_id'])) {
     $admin    = new Admin();
     $teacher = $admin->view_teacher(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT), true);
 

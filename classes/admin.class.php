@@ -5,12 +5,12 @@ class Admin extends Config
 {
     //////////////// STUDENT CRUD (creat, read, update, delete) ///////////////
     // CREATE a new student
-    public function create_student($student_name, $student_phone_number, $email, $password, $role)
+    public function create_student($student_name, $student_phone_number, $email, $password, $role,$class)
     {
         
         // check if items to insert exists in the input array or note
-        if (isset($role) && isset($student_name) && isset($student_phone_number) && isset($email) && isset($password) && strlen($password) > 5) {
-            $insert = $this->db->query("INSERT INTO `user`(`name`, `phone_number`, `email`, `password`, `role`) VALUES (?,?,?,?,?)", $student_name, $student_phone_number, $email, $password, $role);
+        if (isset($role) && isset($student_name) && isset($student_phone_number) && isset($email) && isset($password) && strlen($password) > 3) {
+            $insert = $this->db->query("INSERT INTO `user`(`name`, `phone_number`, `email`, `password`, `role`,`class`) VALUES (?,?,?,?,?,?)", $student_name, $student_phone_number, $email, $password, $role,$class);
             // print_r($insert); die;
             // if more than 1 row returned then it insertion was successfull
             if ($insert->affectedRows() > 0) {
@@ -22,7 +22,7 @@ class Admin extends Config
     }
 
     // View all student
-    public function view_student($student_id, $single = false)
+    public function view_student($student_id, $single = false,$class='%')
     {
         $success = false; // variable to return if insertion success or failed
         if(gettype(intval($student_id)) != 'integer') return false;
@@ -30,7 +30,7 @@ class Admin extends Config
         
         // check if items to insert exists in the input array or note
         if ($single == true && $student_id != 0) {
-            $insert = $this->db->query("SELECT * FROM `user` WHERE role='student' and uid = " . $student_id);
+            $insert = $this->db->query("SELECT * FROM `user` WHERE role='student' and class=$class and uid = " . $student_id);
         } elseif($student_id == 0 && $single ==false) {
             // $insert = $this->db->query("SELECT DISTINCT level2.student_id, level2.student_name, level2.student_phone_number, level2.email, level2.teacher_name, GROUP_CONCAT(DISTINCT(subject.subject_name) SEPARATOR '<br>') AS subjects FROM (SELECT DISTINCT level.student_id, level.student_name, level.student_phone_number, level.email, level.teacher_name, assigned.subject_id FROM (SELECT DISTINCT student.student_id, student.student_name, student.student_phone_number, student.email, student.teacher_id, teacher.teacher_name FROM student LEFT OUTER JOIN teacher ON student.teacher_id = teacher.teacher_id) level NATURAL LEFT JOIN assigned) level2 NATURAL LEFT JOIN subject GROUP BY level2.student_id ORDER BY level2.student_id ASC");
             $insert = $this->db->query("SELECT * FROM USER WHERE ROLE=?", 'student');
@@ -107,7 +107,7 @@ class Admin extends Config
     public function assign_teacher($teacher_id, $student_id)
     {
         if ($this->teacher_exists($teacher_id) === true) {
-            $assign = $this->db->query("UPDATE student SET student.teacher_id = ? WHERE student_id = ?", $teacher_id, $student_id);
+            $assign = $this->db->query("UPDATE user SET student.teacher_id = ? WHERE student_id = ?", $teacher_id, $student_id);
             return ($assign->affectedRows() > 0);
         }
 
@@ -123,7 +123,7 @@ class Admin extends Config
         // check if items to insert exists in the input array or note
         if (isset($teacher_name) && isset($teacher_phone_number) && isset($email) && isset($password) && strlen($password) > 5 ) {
             $insert = $this->db->query("INSERT INTO `user`(`name`, `phone_number`, `email`, `password`, `role`) VALUES (?,?,?,?,?)", $teacher_name, $teacher_phone_number, $email, $password, 'teacher');
-
+                echo'dd';
             // if more than 1 row returned then it insertion was successfull
             if ($insert->numRows() > 0) {
                 $success = true;
@@ -146,7 +146,7 @@ class Admin extends Config
         //     $view = $this->db->query("SELECT level1.*, GROUP_CONCAT(DISTINCT student.student_name SEPARATOR '<br>') AS students FROM (SELECT DISTINCT teacher.teacher_id, teacher.teacher_phone_number, teacher.teacher_name, teacher.email, GROUP_CONCAT(DISTINCT subject.subject_name SEPARATOR ', ') AS subjects FROM teacher LEFT OUTER JOIN subject ON teacher.teacher_id = subject.teacher_id GROUP BY teacher.teacher_id) level1 LEFT OUTER JOIN student ON level1.teacher_id = student.teacher_id GROUP BY level1.teacher_id");
         // }
         if ($single == true && $teacher_id != 0) {
-            $insert = $this->db->query("SELECT * FROM `user` WHERE role='teacher' and uid = " . $teacher_id);
+            $view = $this->db->query("SELECT * FROM `user` WHERE role='teacher' and uid = " . $teacher_id);
         } elseif($teacher_id == 0 && $single ==false) {
             // $insert = $this->db->query("SELECT DISTINCT level2.student_id, level2.student_name, level2.student_phone_number, level2.email, level2.teacher_name, GROUP_CONCAT(DISTINCT(subject.subject_name) SEPARATOR '<br>') AS subjects FROM (SELECT DISTINCT level.student_id, level.student_name, level.student_phone_number, level.email, level.teacher_name, assigned.subject_id FROM (SELECT DISTINCT student.student_id, student.student_name, student.student_phone_number, student.email, student.teacher_id, teacher.teacher_name FROM student LEFT OUTER JOIN teacher ON student.teacher_id = teacher.teacher_id) level NATURAL LEFT JOIN assigned) level2 NATURAL LEFT JOIN subject GROUP BY level2.student_id ORDER BY level2.student_id ASC");
             $view = $this->db->query("SELECT * FROM USER WHERE ROLE=?", 'teacher');
@@ -189,10 +189,10 @@ class Admin extends Config
 
         // check if items to insert exists in the input array or note
         if (isset($teacher_id)) {
-            $insert = $this->db->query("DELETE FROM `teacher` WHERE `teacher_id`=?", $teacher_id);
+            $insert = $this->db->query("DELETE FROM `user` WHERE `uid`=?", $teacher_id);
 
             // if more than 1 row returned then it insertion was successfull
-            if ($insert->numRows() > 0) {
+            if ($insert->affectedRows() > 0) {
                 $success = true;
             }
         }
@@ -216,5 +216,22 @@ class Admin extends Config
     public function close_DB()
     {
         $this->db->close();
+    }
+    
+    // attendence 
+    public function attendence($student_id,$attend,$date,$teacher_id)
+    {
+        $success = false; // variable to return if insertion success or failed
+
+        // check if items to insert exists in the input array or note
+        if (isset($student_id) && isset($attend) && isset($date) && isset($teacher_id)) {
+            $insert = $this->db->query("INSERT INTO `attendance`(`std_id`, `attend_date`, `teacher_id`, `attend`) VALUES (?,?,?,?)",$student_id,$date,$teacher_id,$attend);
+            // if more than 1 row returned then it insertion was successfull
+            if ($insert->affectedRows() > 0) {
+                $success = true;
+            }
+        }
+
+        return $success;
     }
 }

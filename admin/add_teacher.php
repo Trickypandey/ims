@@ -16,6 +16,7 @@ Structure::header("Add Teacher - Admin");
 // Check if form submitted
 if (Structure::if_all_inputs_exists(array("teacher_name", "teacher_phone_number", "email", "password"), "POST") == true) {
     $admin = new Admin();
+    echo'dd';
     if (is_bool($admin->create_teacher(
         filter_input(INPUT_POST, "teacher_name", FILTER_DEFAULT),
         filter_input(INPUT_POST, "teacher_phone_number", FILTER_DEFAULT),

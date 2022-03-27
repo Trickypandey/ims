@@ -28,37 +28,31 @@ echo('<hr>
                       <td><a href="admin/add_student.php" class="text-secondary">Add Student</a></td>
                     </tr>
                     <tr>
-                      <td><a href="admin/view_students.php" class="text-secondary">View Student</a></td>
+                      <td><a href="admin/view_students.php" class="text-secondary">manageStudent</a></td>
                     </tr>
                     <tr>
-                      <td><a href="admin/view_students.php" class="text-secondary">Update Student</a></td>
-                    </tr>
+                    <td><a href="admin/std_attendence.php" class="text-secondary">Take attendence</a></td>
+                   </tr>
                     <tr>
-                      <td><a href="admin/view_students.php" class="text-secondary">Delete Student</a></td>
-                    </tr>
-                  </tbody>
-                </table>
+                    <td><a href="admin/time_table.php" class="text-secondary">create timetable  </a></td>
+                   </tr>
+                    </tbody>
+                    </table>
             </div>
-
+            
             <div class="col col-sm-12 col-md-12 col-md-offset-2 ">
-                <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover">
                   <thead class="bg-info text-white">
                     <tr>
                       <th scope="col">Teacher</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
-                      <td><a href="admin/add_teacher.php" class="text-secondary">Add Teacher</a></td>
+                    <td><a href="admin/add_teacher.php" class="text-secondary">Add Teacher</a></td>
                     </tr>
                     <tr>
-                      <td><a href="admin/view_teachers.php" class="text-secondary">View Teacher</a></td>
-                    </tr>
-                    <tr>
-                      <td><a href="admin/view_teachers.php" class="text-secondary">Update Teacher</a></td>
-                    </tr>
-                    <tr>
-                      <td><a href="admin/ view_teachers.php" class="text-secondary">Delete Teacher</a></td>
+                    <td><a href="admin/view_teachers.php" class="text-secondary">Manage teacher</a></td>
                     </tr>
                   </tbody>
                 </table>

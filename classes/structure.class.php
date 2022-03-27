@@ -59,7 +59,7 @@ class Structure
 
     public static function header($title)
     {
-        session_start();
+        isset($_SESSION) ?: session_start();
         $servername='localhost';
         $username='root';
         $serverpass='';
@@ -118,8 +118,8 @@ class Structure
                 <label for="checkbox_toggle" class="hamburger">&#9776;</label> -->
                 <!-- NAVIGATION MENUS -->
                 <div class="menu">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard.php">dashboard</a></li>
+                    
+                    <?= isset($_SESSION['role']) ? '<li><a href="'.$_SESSION['role'].'/index.php">dashboard</a></li>' : '' ?>
                     <li><a href="/">Contact</a></li>
                     <?php if(isset($_SESSION['uid'])){
                         echo '<li><a href="logout.php">Logout</a></li>';
@@ -135,7 +135,7 @@ class Structure
                             </ul>
                         </li>
                     <?php } ?>
-                    <li>
+                    
                 </div>
                 </ul>
             </nav>
@@ -149,7 +149,7 @@ class Structure
         ?>
      <footer>
         <!-- Footer main -->
-        <section class="ft-main">
+        <!-- <section class="ft-main">
             <div class="ft-main-item">
             <h2 class="ft-title">About</h2>
             <ul>
@@ -185,7 +185,7 @@ class Structure
                 <input type="submit" value="Subscribe">
             </form>
             </div>
-        </section>
+        </section> -->
 
         <!-- Footer social -->
         <section class="ft-social">
@@ -202,8 +202,8 @@ class Structure
         <!-- Footer legal -->
         <section class="ft-legal">
             <ul class="ft-legal-list">
-            <li><a href="#">Terms &amp; Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <!-- <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li> -->
             <li>&copy; <?= date('Y', time()) ?> by IMS</li>
             </ul>
         </section>
@@ -257,7 +257,7 @@ class Structure
 
     public static function errorPage($error)
     {
-        Structure::header("Error - Project");
+        // Structure::header("Error - Project");
         echo('<main role="main" class="container mt-3">
             <h1 class="display-4 text">Error</h1>
             <hr>

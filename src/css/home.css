@@ -259,6 +259,7 @@ form {
     display: none;
     border-radius: 8px;
     top: 35px;
+    right: 0;
    }
    .dropdown li + li {
     margin-top: 10px;

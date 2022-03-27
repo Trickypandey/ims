@@ -32,11 +32,11 @@ if (Structure::if_all_inputs_exists(array("teacher_id", "teacher_name", "teacher
     }
 
     //$admin->close_DB();
-} elseif (isset(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT)) && !empty(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT))) {
+} elseif (isset($_GET['teacher_id'])) {
     $admin    = new Admin();
     $teacher  = $admin->view_teacher(filter_input(INPUT_GET, "teacher_id", FILTER_DEFAULT), true);
 
-    if (!isset($teacher["teacher_id"])) {
+    if (!isset($teacher["uid"])) {
         Structure::errorBox("Update Teacher", "Select a valid teacher!");
     } else {
         // Form to fill details
@@ -44,14 +44,14 @@ if (Structure::if_all_inputs_exists(array("teacher_id", "teacher_name", "teacher
         Structure::topHeading("Update Teacher");
         echo('<hr>
           <form method="POST">
-            <input type="hidden" name="teacher_id" value="'._esc($teacher["teacher_id"]).'">
+            <input type="hidden" name="teacher_id" value="'._esc($teacher["uid"]).'">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" name="teacher_name" class="form-control" id="teacher_name" aria-describedby="teacher_name" value="'._esc($teacher["teacher_name"]).'">
+              <input type="text" name="teacher_name" class="form-control" id="teacher_name" aria-describedby="teacher_name" value="'._esc($teacher["name"]).'">
             </div>
             <div class="form-group">
               <label for="teacher_phone_number">Phone Number</label>
-              <input type="number" name="teacher_phone_number" class="form-control" id="teacher_phone_number" aria-describedby="teacher_phone_number" value="'._esc($teacher["teacher_phone_number"]).'">
+              <input type="number" name="teacher_phone_number" class="form-control" id="teacher_phone_number" aria-describedby="teacher_phone_number" value="'._esc($teacher["phone_number"]).'">
             </div>
             <div class="form-group">
               <label for="email">Email address</label>

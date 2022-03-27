@@ -15,16 +15,17 @@ Structure::header("Add Student - Admin");
 // Main Content Goes Here
 // Check if form submitted
 
-if (Structure::if_all_inputs_exists(array("student_name", "student_phone_number", "email", "password"), "POST") == true) {
+if (Structure::if_all_inputs_exists(array("student_name", "student_phone_number","class" ,"email", "password"), "POST") == true) {
   // print_r($_POST);
     $admin = new Admin();
-    if (is_bool($admin->create_student(
+    if ($admin->create_student(
         filter_input(INPUT_POST, "student_name", FILTER_DEFAULT),
         filter_input(INPUT_POST, "student_phone_number", FILTER_DEFAULT),
         filter_input(INPUT_POST, "email", FILTER_DEFAULT),
         filter_input(INPUT_POST, "password", FILTER_DEFAULT),
         'student'
-    )) === true) {
+        ,filter_input(INPUT_POST, "class", FILTER_DEFAULT),
+    ) === true) {
         // On success
         Structure::successBox("Add Student", "Successfully added student!", Structure::nakedURL("view_students.php"));
     } else {
@@ -42,7 +43,18 @@ if (Structure::if_all_inputs_exists(array("student_name", "student_phone_number"
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" name="student_name" class="form-control" id="student_name" aria-describedby="student_name">
-            </div>
+              </div>
+              <div class="form-group">
+              <label for="Clas">Class</label>
+                <div class="class-list">
+                  <select name="class" id="std">
+                    <option value=""disabled selected>choose your class </option>
+                    <option value="10">10</option>
+                    <option value="9">9</option>
+                    <option value="8">8</option>
+                  </select> 
+                </div>
+              </div>
             <div class="form-group">
               <label for="student_phone_number">Phone Number</label>
               <input type="number" name="student_phone_number" class="form-control" id="student_phone_number" aria-describedby="student_phone_number">
@@ -55,7 +67,6 @@ if (Structure::if_all_inputs_exists(array("student_name", "student_phone_number"
               <label for="password">Password</label>
               <input type="password" name="password" id="password" class="form-control" id="password">
             </div>
-
             <div class="row">
               <div class="col-sm-12">
                   <button type="submit" class="btn btn-success btn-small">Submit</button>
@@ -65,8 +76,10 @@ if (Structure::if_all_inputs_exists(array("student_name", "student_phone_number"
           </form>
       </main>');
 }
+
 // Display Footer
 Structure::footer();
 
 // delete object
 unset($admin);
+?>

@@ -29,10 +29,10 @@ echo('<hr>
                       <td><a href="admin/view_students.php" class="text-secondary text-decoration-none">View Students</a></td>
                     </tr>
                     <tr>
-                      <td><a href="admin/view_subjects.php" class="text-secondary text-decoration-none">View Subjects</a></td>
+                      <td><a href="teacher/view_subjects.php" class="text-secondary text-decoration-none">View Subjects</a></td>
                     </tr>
                     <tr>
-                      <td><a href="admin/add_subject.php" class="text-secondary text-decoration-none">Add a new subject</a></td>
+                      <td><a href="teacher/add_subject.php" class="text-secondary text-decoration-none">Add a new subject</a></td>
                     </tr>
                   </tbody>
                 </table>
